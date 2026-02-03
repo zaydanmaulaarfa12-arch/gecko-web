@@ -1,1 +1,711 @@
-file:///C:/Users/User/Downloads/triadfile.html
+
+[triadfile.html](https://github.com/user-attachments/files/25043949/triadfile.html)
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Gecko - Jual Beli Gecko Berkualitas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        nav button.active {
+            background-color: white;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #2ecc71;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .btn-beli {
+            width: 100%;
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-beli:hover {
+            background-color: #27ae60;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            color: #2ecc71;
+            cursor: pointer;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .slider-container {
+            position: relative;
+            background: linear-gradient(135deg, #e8f8f5 0%, #d5f4e6 100%);
+            height: 400px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .slider-emoji {
+            font-size: 150px;
+        }
+
+        .prev-btn, .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(46, 204, 113, 0.8);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 5px;
+            z-index: 5;
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .detail-info {
+            padding: 30px;
+        }
+
+        .detail-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section h3 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        .detail-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .detail-price {
+            font-size: 32px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .detail-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .detail-buttons button {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-chat {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .btn-chat:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-close {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .about-content, .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-content h2, .contact-form h2 {
+            color: #2ecc71;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .about-content p {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-submit:hover {
+            background-color: #27ae60;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🦎 Toko Gecko</div>
+            <ul>
+                <li><button class="nav-btn active" onclick="showSection('home')">Beranda</button></li>
+                <li><button class="nav-btn" onclick="showSection('produk')">Produk</button></li>
+                <li><button class="nav-btn" onclick="showSection('tentang')">Tentang</button></li>
+                <li><button class="nav-btn" onclick="showSection('kontak')">Kontak</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Selamat Datang di Toko Gecko</h1>
+                <p>Penyedia Gecko Berkualitas Tinggi dan Sehat</p>
+                <button class="btn-primary" onclick="showSection('produk')">Lihat Produk</button>
+            </div>
+        </section>
+
+        <!-- Product Section -->
+        <section id="produk" class="section">
+            <h2 style="color: #2ecc71; margin-bottom: 30px; font-size: 36px;">Daftar Produk</h2>
+            <div class="product-grid" id="productGrid"></div>
+        </section>
+
+        <!-- About Section -->
+        <section id="tentang" class="section">
+            <div class="about-content">
+                <h2>Tentang Toko Gecko</h2>
+                <p>Toko Gecko adalah penjual reptil terpercaya sejak tahun 2015. Kami berkomitmen menyediakan gecko berkualitas tinggi dengan harga kompetitif.</p>
+                <p>Setiap gecko telah melalui pemeriksaan kesehatan ketat dan mendapat perawatan profesional dari tim berpengalaman.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="kontak" class="section">
+            <h2 style="color: #2ecc71; margin-bottom: 30px; font-size: 36px; text-align: center;">Hubungi Kami</h2>
+            <div class="contact-form" style="max-width: 600px; margin: 0 auto;">
+                <h2>Kirim Pesan</h2>
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pesan</label>
+                        <textarea required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Kirim</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Alamat</h3>
+                    <p>Jl. Reptil No. 123<br>Jakarta Selatan</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📞 Telepon</h3>
+                    <p>+62 812-3456-7890</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p>info@tokogecko.com</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Toko Gecko. Semua hak cipta dilindungi.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeDetail()">×</button>
+            
+            <div class="slider-container">
+                <div id="sliderContent"></div>
+                <button class="prev-btn" onclick="prevSlide()">❮</button>
+                <button class="next-btn" onclick="nextSlide()">❯</button>
+            </div>
+
+            <div class="detail-info">
+                <div class="detail-name" id="detailName"></div>
+                <div class="detail-section">
+                    <h3>📋 Deskripsi</h3>
+                    <p id="detailDescription"></p>
+                </div>
+                <div class="detail-section">
+                    <h3>ℹ️ Informasi</h3>
+                    <p id="detailInfo"></p>
+                </div>
+                <div class="detail-price" id="detailPrice"></div>
+                <div class="detail-section">
+                    <h3>📝 Catatan</h3>
+                    <p id="detailNotes"></p>
+                </div>
+                <div class="detail-buttons">
+                    <button class="btn-chat" onclick="contactForPurchase()">💬 Chat Sekarang</button>
+                    <button class="btn-close" onclick="closeDetail()">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== DATA GECKO - GAMPANG TAMBAHIN LINK GAMBAR =====
+        const geckoData = {
+            1: {
+                name: "Gecko Leopard Kuning",
+                images: [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Juvenile-leopard-gecko.jpg/960px-Juvenile-leopard-gecko.jpg?20091209032241",
+                    "https://via.placeholder.com/400?text=Gecko+Kuning+2"
+                ],
+                description: "Gecko Leopard dengan warna kuning cerah yang sangat menarik. Jinak dan mudah dirawat.",
+                info: "Usia: 6 bulan | Jenis: Leopard Gecko | Temperamen: Jinak",
+                price: "Rp 450.000",
+                notes: "Sudah terbiasa makan jangkrik. Kesehatan prima."
+            },
+            2: {
+                name: "Gecko Leopard Putih",
+                images: [
+                    "https://via.placeholder.com/400?text=Gecko+Putih+1",
+                    "https://via.placeholder.com/400?text=Gecko+Putih+2"
+                ],
+                description: "Gecko Leopard albino putih yang langka dan cantik. Temperamen sangat tenang.",
+                info: "Usia: 8 bulan | Jenis: Leopard Gecko Albino | Temperamen: Tenang",
+                price: "Rp 650.000",
+                notes: "Gecko premium dengan adaptasi tinggi."
+            },
+            3: {
+                name: "Gecko Hari Merah",
+                images: [
+                    "https://via.placeholder.com/400?text=Gecko+Merah+1",
+                    "https://via.placeholder.com/400?text=Gecko+Merah+2"
+                ],
+                description: "Warna merah merona spektakuler. Sangat aktif dan menarik untuk diobservasi.",
+                info: "Usia: 1 tahun | Jenis: Day Gecko | Temperamen: Aktif",
+                price: "Rp 750.000",
+                notes: "Membutuhkan habitat khusus dengan kelembaban tinggi."
+            }
+        };
+
+        let currentSlide = 0;
+        let currentGeckoId = null;
+
+        // Render semua produk
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            Object.keys(geckoData).forEach(id => {
+                const gecko = geckoData[id];
+                const firstImage = gecko.images[0];
+                
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => openDetail(id);
+                
+                let imageHTML;
+                if (firstImage.startsWith('http')) {
+                    imageHTML = `<img src="${firstImage}" alt="${gecko.name}">`;
+                } else {
+                    imageHTML = `<div class="slider-emoji">${firstImage}</div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="product-image">${imageHTML}</div>
+                    <div class="product-info">
+                        <div class="product-name">${gecko.name}</div>
+                        <div class="product-description">${gecko.description}</div>
+                        <div class="product-price">${gecko.price}</div>
+                        <button class="btn-beli" onclick="event.stopPropagation(); openDetail(${id});">Lihat Detail</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openDetail(geckoId) {
+            currentGeckoId = geckoId;
+            currentSlide = 0;
+            const gecko = geckoData[geckoId];
+
+            document.getElementById('detailName').textContent = gecko.name;
+            document.getElementById('detailDescription').textContent = gecko.description;
+            document.getElementById('detailInfo').textContent = gecko.info;
+            document.getElementById('detailPrice').textContent = gecko.price;
+            document.getElementById('detailNotes').textContent = gecko.notes;
+
+            updateSlider();
+            document.getElementById('detailModal').classList.add('active');
+        }
+
+        function closeDetail() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+
+        function updateSlider() {
+            const gecko = geckoData[currentGeckoId];
+            const img = gecko.images[currentSlide];
+            const content = document.getElementById('sliderContent');
+
+            if (img.startsWith('http')) {
+                content.innerHTML = `<img class="slider-image" src="${img}" alt="${gecko.name}">`;
+            } else {
+                content.innerHTML = `<div class="slider-emoji">${img}</div>`;
+            }
+        }
+
+        function nextSlide() {
+            const images = geckoData[currentGeckoId].images;
+            currentSlide = (currentSlide + 1) % images.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            const images = geckoData[currentGeckoId].images;
+            currentSlide = (currentSlide - 1 + images.length) % images.length;
+            updateSlider();
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            alert('Pesan Anda telah dikirim!');
+            event.target.reset();
+        }
+
+        function contactForPurchase() {
+            const gecko = geckoData[currentGeckoId];
+            alert(`Tertarik dengan ${gecko.name}?\n\nHubungi: +62 812-3456-7890`);
+        }
+
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html>
